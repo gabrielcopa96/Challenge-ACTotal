@@ -8,6 +8,18 @@
     grid-row-gap: 0px;
     place-content: center;
 
+    & .title {
+        color: $primary-color;
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    & .separator {
+        width: 2px;
+        background-color: $primary-color;
+    }
+
+    // FORM CREATE DATA
     & .container-form {
         display: flex;
         flex-direction: column;
@@ -19,39 +31,67 @@
             flex-direction: column;
             justify-content: center;
             gap: 1.25rem;
-    
+
             & .field {
                 display: grid;
                 grid-template-columns: 1fr 2fr;
-                gap: 1rem;
-    
+                place-content: center;
+                align-items: baseline;
+                justify-items: stretch;
+                gap: 1.25rem;
+
                 & label {
                     color: $primary-color;
                     font-weight: 600;
+                }
+
+                & .input {
+                    padding: .35rem;
+                    outline: none;
                 }
             }
 
             & button {
                 width: max-content;
                 align-self: self-end;
-
-                &:hover {
-                    cursor: pointer;
-                }
+                cursor: pointer;
             }
         }
     }
 
+    // LIST DATA
 
-    & .title {
-        color: $primary-color;
-        text-align: center;
-        margin-bottom: 3rem;
-    }
+    & .container-list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
-    & .separator {
-        width: 2px;
-        background-color: $primary-color;
+        & .list-person {
+            display: flex;
+            flex-direction: column;
+            width: 70%;
+            align-items: stretch;
+            gap: .25rem;
+
+            & .content-person {
+                background-color: $background-list;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(2, 1fr);
+                gap: .35rem;
+                padding: .35rem;
+
+                & .item-person {
+                    font-weight: 600;
+                    color: $secondary-color;
+
+                    & span {
+                        margin-left: .25rem;
+                        color: $primary-color;
+                    }
+                }
+            }
+        }
     }
 
 }

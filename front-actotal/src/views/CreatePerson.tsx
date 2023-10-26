@@ -1,28 +1,48 @@
+import { ChangeEvent, useContext } from "react"
+import Button from "../components/Button"
+import { PersonContext } from "../context/PersonContext"
 
 const CreatePerson = () => {
-  return (
-    <div className="container-form">
-        <h1 className="title">Ingreso de Datos</h1>
-        <form className="form">
-            <div className="field">
-                <label htmlFor="">Nombre: </label>
-                <input type="text" />
-            </div>
 
-            <div className="field">
-                <label htmlFor="">Email: </label>
-                <input type="text" />
-            </div>
+    const { formValues, setFormValues } = useContext(PersonContext);
 
-            <div className="field">
-                <label htmlFor="">Teléfono: </label>
-                <input type="text" />
-            </div>
+    /* ------------ HANDLE -------------- */
+    const handleChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
+        setFormValues({
+            ...formValues,
+            [event.target.name]: event.target.value
+        })
+    }
 
-            <button>Guardar</button>
-        </form>
-    </div>
-  )
+    const handleSubmit = (event: MouseEvent) => {
+        event.preventDefault();
+        console.log("realmente estoy haciendo click")
+    }
+
+    return (
+        <div className="container-form">
+            <h1 className="title">Ingreso de Datos</h1>
+            <form className="form">
+
+                <div className="field">
+                    <label htmlFor="">Nombre: </label>
+                    <input type="text" className="input" onChange={handleChangeInput} />
+                </div>
+
+                <div className="field">
+                    <label htmlFor="">Email: </label>
+                    <input type="text" className="input" onChange={handleChangeInput} />
+                </div>
+
+                <div className="field">
+                    <label htmlFor="">Teléfono: </label>
+                    <input type="text" className="input" onChange={handleChangeInput} />
+                </div>
+
+                <Button onClick={handleSubmit}>Agregar</Button>
+            </form>
+        </div>
+    )
 }
 
 export default CreatePerson

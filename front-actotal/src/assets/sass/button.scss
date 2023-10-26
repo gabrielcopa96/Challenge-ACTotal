@@ -1,0 +1,10 @@
+.btn {
+    padding: .45rem;
+    background-color: white;
+    border: none;
+
+    &:hover {
+        background-color: #418cb8b9;
+        transition: all .2s ease-in;
+    }
+}

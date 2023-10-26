@@ -18,4 +18,9 @@ body {
         display: flex;
         justify-content: center;
     }
+
+    & .main {
+        display: grid;
+        place-items: center;
+    }
 }

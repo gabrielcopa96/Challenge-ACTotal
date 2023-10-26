@@ -1,16 +1,13 @@
 import Logo from "./components/Logo";
-import Person from "./views/Person";
+import MainPerson from "./views/MainPerson";
 
 function App() {
 
   return (
-    <>
-      <div className="logo-container">
-        <Logo />
-      </div>
-
-      <Person />
-    </>
+    <div className="main">
+      <Logo />
+      <MainPerson />
+    </div>
   )
 }
 
