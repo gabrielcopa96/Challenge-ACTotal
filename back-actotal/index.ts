@@ -1,20 +1,17 @@
-import express, { type Express } from "express";
-import "dotenv/config";
-import cors from "cors";
-import morgan from "morgan";
+import app from "./src/app";
+import { sequelize } from "./src/config/config-database";
+import "./src/models/Persons";
 
-const app: Express = express();
+app.listen(process.env.PORT, async () => {
+    try {
 
-app.use(express.json({ limit: "50mb" }));
+        await sequelize.sync({ force: false });
+        console.log('Database connected');
+        console.log(`Server is running on port ${process.env.PORT}`);
 
-// cors policies
-app.use(cors());
+    } catch (error) {
 
-app.use(express.urlencoded({ limit: "50mb", extended: true }));
+        console.error('Unable to connect to the database', error);
 
-// logging
-app.use(morgan("dev"));
-
-app.listen(process.env.PORT, () => {
-    console.log(`Server is running on port ${process.env.PORT}`);
+    }
 });
