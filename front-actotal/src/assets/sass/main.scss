@@ -1,0 +1,21 @@
+:root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: $background;
+    
+    & .title {
+        color: $color-title;
+    }
+
+    & .logo-container {
+        display: flex;
+        justify-content: center;
+    }
+}
