@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 
 // import types and interfaces
-import type { ContextProps, FormValuesType, PersonType, ValueContextType } from "./type";
+import type { ContextProps, ErrorType, FormValuesType, PersonType, ValueContextType } from "./type";
 
 // context
 export const PersonContext = createContext({} as ValueContextType);
@@ -16,6 +16,17 @@ export const PersonContextProvider = ({ children }: ContextProps) => {
         email: '',
     });
 
+    const [errors, setErrors] = useState<ErrorType>({
+        name: false,
+        phone: false,
+        email: false,
+        create: false
+    });
+
+    const [page, setPage] = useState<number>(1);
+
+    const [totalPages, setTotalPages] = useState(null);
+
     const [limit, setLimit] = useState<number>(8);
 
     const [persons, setPersons] = useState<PersonType | any>([]);
@@ -23,8 +34,9 @@ export const PersonContextProvider = ({ children }: ContextProps) => {
 
     /* ------------ SERVICE FETCH -------------- */
     const getPersons = async () => {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/person?limit=${limit}`, { cache: 'no-store' });
-        const { data } = await response.json();
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/person?limit=${limit}&page=${page}`, { cache: 'no-store' });
+        const { data, total_pages } = await response.json();
+        setTotalPages(total_pages);
         setPersons(data);
     }
 
@@ -33,15 +45,31 @@ export const PersonContextProvider = ({ children }: ContextProps) => {
 
         try {
             // convert number phone
-            person.phone = Number(person.phone);
-            await fetch(`${import.meta.env.VITE_API_URL}/person`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/person/create`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(person)
             });
-            await getPersons();
+            if (response.status === 201) {
+                await getPersons();
+                setFormValues({
+                    name: '',
+                    phone: '',
+                    email: '',
+                });
+                setErrors({
+                    ...errors,
+                    create: false
+                })
+            }
+            else if (response.status === 400 && (formValues.email && formValues.name && formValues.phone)) {
+                setErrors({
+                    ...errors,
+                    create: true,
+                })
+            }
         } catch (error) {
             console.log("Error: ", error);
         }
@@ -50,8 +78,10 @@ export const PersonContextProvider = ({ children }: ContextProps) => {
 
     /* ------------ EFFECT FETCH -------------- */
     useEffect(() => {
-        getPersons();
-    }, [])
+        (async () => {
+            await getPersons();
+        })()
+    }, [page])
 
     /* ----------- RETURN -------------- */
     return <PersonContext.Provider value={{
@@ -59,7 +89,11 @@ export const PersonContextProvider = ({ children }: ContextProps) => {
         setFormValues,
         persons,
         setPersons,
-        setLimit,
-        createPerson
+        createPerson,
+        errors,
+        setErrors,
+        setPage,
+        page,
+        totalPages
     }}>{children}</PersonContext.Provider>
 }

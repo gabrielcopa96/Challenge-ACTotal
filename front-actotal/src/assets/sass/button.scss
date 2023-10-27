@@ -1,10 +1,20 @@
 .btn {
-    padding: .45rem;
-    background-color: white;
+    padding: .55rem;
+    background-color: #418cb8b9;
+    color: #ffff;
+    font-weight: 600;
+    border-radius: 2px;
     border: none;
+    cursor: pointer;
 
     &:hover {
-        background-color: #418cb8b9;
-        transition: all .2s ease-in;
+        background-color: $primary-color;
+        outline: 1px solid #ffffff7c;
+    }
+
+    &:disabled {
+        background-color: #a3a3a3;
+        outline: none;
+        cursor: not-allowed;
     }
 }

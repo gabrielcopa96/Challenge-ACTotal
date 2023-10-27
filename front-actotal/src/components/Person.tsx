@@ -9,18 +9,19 @@ const Person = ({ person }: any) => {
     return (
         <div className="content-person">
             <div className="item-person">
-                Nombre: <span>{person.name}</span>
-            </div>
-            <div className="item-person">
-                Telefono: <span>{person.phone}</span>
+                Nombre: <span className="item-value">{person.name}</span>
             </div>
 
             <div className="item-person">
-                Email: <span>{person.email}</span>
+                Email: <span className="item-value">{person.email}</span>
             </div>
 
             <div className="item-person">
-                Ingresado: <span>{formatISODateToDDMMYYYY(person.createdAt)}</span>
+                Telefono: <span className="item-value">{person.phone}</span>
+            </div>
+
+            <div className="item-person">
+                Ingresado: <span className="item-value">{formatISODateToDDMMYYYY(person.createdAt)}</span>
             </div>
         </div>
     )

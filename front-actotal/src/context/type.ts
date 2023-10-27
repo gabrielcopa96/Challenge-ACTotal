@@ -15,8 +15,12 @@ export type PersonType = {
 
 export type FormValuesType = {
     name: string,
-    phone: string,
+    phone: string | number,
     email: string
+}
+
+export type ErrorType = {
+    [key: string]: boolean
 }
 
 export type ValueContextType = {
@@ -24,6 +28,10 @@ export type ValueContextType = {
     setFormValues: Dispatch<SetStateAction<FormValuesType>>,
     persons: PersonType[],
     setPersons: Dispatch<SetStateAction<PersonType[]>>,
-    setLimit: Dispatch<SetStateAction<number>>,
     createPerson: (person: any) => Promise<void>;
+    errors: ErrorType
+    setErrors: Dispatch<SetStateAction<ErrorType>>,
+    setPage: Dispatch<SetStateAction<number>>,
+    page: number,
+    totalPages: number | null,
 }

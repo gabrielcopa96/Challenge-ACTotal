@@ -11,7 +11,6 @@
     & .title {
         color: $primary-color;
         text-align: center;
-        margin-bottom: 3rem;
     }
 
     & .separator {
@@ -32,6 +31,15 @@
             justify-content: center;
             gap: 1.25rem;
 
+            & .alert {
+                background-color: $color-error;
+                padding: .35rem;
+                display: flex;
+                align-items: center;
+                gap: .45rem;
+                color: #ffff;
+            }
+
             & .field {
                 display: grid;
                 grid-template-columns: 1fr 2fr;
@@ -48,30 +56,57 @@
                 & .input {
                     padding: .35rem;
                     outline: none;
+
+                    &.error {
+                        outline: 1px solid $color-error;
+                        color: $color-error;
+                    }
                 }
             }
 
             & button {
                 width: max-content;
                 align-self: self-end;
-                cursor: pointer;
             }
         }
     }
 
     // LIST DATA
-
     & .container-list {
         display: flex;
         flex-direction: column;
         align-items: center;
+        gap: 1rem;
+
+        & .btn-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: auto;
+        }
 
         & .list-person {
             display: flex;
             flex-direction: column;
             width: 70%;
+            max-height: 60vh;
+            overflow-y: auto;
             align-items: stretch;
             gap: .25rem;
+
+            &::-webkit-scrollbar {
+                width: 12px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background-color: $primary-color;
+                border-radius: 6px;
+            }
+
+            &::-webkit-scrollbar-track {
+                background: $secondary-color;
+            }
+
 
             & .content-person {
                 background-color: $background-list;
@@ -84,6 +119,9 @@
                 & .item-person {
                     font-weight: 600;
                     color: $secondary-color;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
 
                     & span {
                         margin-left: .25rem;
