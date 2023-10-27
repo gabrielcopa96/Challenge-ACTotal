@@ -22,10 +22,10 @@
   },
   "dependencies": {
     "express": "^4.18.2",
-    "mongodb": "^6.2.0",
     "morgan": "^1.10.0",
     "pg": "^8.11.3",
     "pg-hstore": "^2.3.4",
-    "sequelize": "^6.33.0"
+    "sequelize": "^6.33.0",
+    "tsc": "^2.0.4"
   }
 }
