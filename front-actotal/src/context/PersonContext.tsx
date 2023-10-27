@@ -27,7 +27,7 @@ export const PersonContextProvider = ({ children }: ContextProps) => {
 
     const [totalPages, setTotalPages] = useState(null);
 
-    const [limit, setLimit] = useState<number>(8);
+    const [limit] = useState<number>(8);
 
     const [persons, setPersons] = useState<PersonType | any>([]);
 
