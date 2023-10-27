@@ -7,15 +7,29 @@ const getPersons = async (req: Request, res: Response) => {
 
     try {
 
-        const person = await Person.findAll();
+        const { page, limit } = req.query;
 
-        res.json({
-            data: person
+        const offset = (Number(page) - 1) * Number(limit);
+        
+
+        const person = await Person.findAll({
+            order: [['createdAt', 'DESC']],
+            limit: Number(limit),
+            offset: offset
+        });
+
+        const total_count = await Person.count();
+        const total_pages = Math.ceil(total_count / Number(limit));
+
+        res.status(200).json({
+            data: person,
+            total_count,
+            total_pages,
         });
 
     } catch (error) {
 
-        res.json({
+        res.status(400).json({
             message: "error when getting the persons",
             error: error
         });
@@ -33,13 +47,13 @@ const createPerson = async (req: Request, res: Response) => {
 
         await Person.create({ name, phone, email });
 
-        res.json({
+        res.status(201).json({
             data: "created succesfuly"
         })
 
     } catch (error: any) {
 
-        res.json({
+        res.status(400).json({
             message: "error when creating the person",
             error: isErrorSequelize(error) ? error.errors[0].message : error.message
         });
