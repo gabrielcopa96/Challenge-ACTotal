@@ -1,11 +1,11 @@
 .btn {
-    padding: .55rem;
     background-color: #418cb8b9;
-    color: #ffff;
-    font-weight: 600;
-    border-radius: 2px;
     border: none;
+    border-radius: 2px;
+    color: #ffff;
     cursor: pointer;
+    font-weight: 600;
+    padding: .55rem;
 
     &:hover {
         background-color: $primary-color;
@@ -14,7 +14,7 @@
 
     &:disabled {
         background-color: #a3a3a3;
-        outline: none;
         cursor: not-allowed;
+        outline: none;
     }
 }

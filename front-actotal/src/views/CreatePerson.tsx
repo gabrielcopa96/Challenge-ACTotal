@@ -6,13 +6,17 @@ import AlertError from "../components/Alert";
 
 const CreatePerson = () => {
 
+    // I get the states I need from my context to use in this component
     const { formValues, setFormValues, createPerson, errors, setErrors } = useContext(PersonContext);
 
     /* ------------ HANDLE -------------- */
     const handleChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();
-        setErrors({ ...errors, create: false })
+        // every time I retype set in the input I remove its error, if it had error
+        setErrors({ ...errors, create: false, [event.target.name]: false });
+        // I validate the input
         handleErrors({ key: event.target.name, value: event.target.value });
+        // I update the state
         setFormValues({
             ...formValues,
             [event.target.name]: event.target.value
@@ -20,6 +24,7 @@ const CreatePerson = () => {
     }
 
     const handleErrors = ({ key, value }: { key: string, value: string }) => {
+        // I validate the inputs
         if (key === 'name') {
             setErrors({ ...errors, name: !value })
         } else if (key === 'email') {
@@ -31,7 +36,9 @@ const CreatePerson = () => {
 
     const handleSubmit = async (event: MouseEvent) => {
         event.preventDefault();
+        // If all the fields have values, I give you access to make the request to create
         if (formValues.name && formValues.email && formValues.phone) {
+            // convert phone property to number
             formValues.phone = Number(formValues.phone);
             await createPerson(formValues);
         }

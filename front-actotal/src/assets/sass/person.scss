@@ -1,17 +1,17 @@
 .content-container {
-    min-height: 80vh;
-    width: 100%;
     display: grid;
-    grid-template-columns: 1fr .01fr 1fr;
-    grid-template-rows: 1fr;
-    grid-column-gap: 0px;
     grid-row-gap: 0px;
+    grid-column-gap: 0px;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr .01fr 1fr;
+    min-height: 80vh;
     place-content: center;
+    width: 100%;
 
     @media screen and (max-width: 768px) {
+        gap: 1.25rem;
         grid-template-columns: 1fr;
         place-items: center;
-        gap: 1.25rem;
     }
 
     @media screen and (max-width: 480px) {
@@ -24,37 +24,39 @@
     }
 
     & .separator {
-        width: 2px;
         background-color: $primary-color;
+        width: 2px;
 
         @media screen and (max-width: 768px) {
-            width: 80%;
             height: 2px;
+            width: 80%;
         }
     }
 
     // FORM CREATE DATA
     & .container-form {
+        align-items: center;
         display: flex;
         flex-direction: column;
-        align-items: center;
 
-
+        // STYLE FORM
         & .form {
             display: flex;
             flex-direction: column;
-            justify-content: center;
             gap: 1.25rem;
+            justify-content: center;
 
+            // STYLE ALERT BY FORM
             & .alert {
-                background-color: $color-error;
-                padding: .35rem;
-                display: flex;
                 align-items: center;
-                gap: .45rem;
+                background-color: $color-error;
                 color: #ffff;
+                display: flex;
+                gap: .45rem;
+                padding: .35rem;
             }
 
+            // STYLE FIELD - (LABEL + INPUT)
             & .field {
                 display: grid;
                 grid-template-columns: 1fr 2fr;
@@ -63,11 +65,13 @@
                 justify-items: stretch;
                 gap: 1.25rem;
 
+                // STYLE LABEL
                 & label {
                     color: $primary-color;
                     font-weight: 600;
                 }
 
+                // STYLE INPUTS
                 & .input {
                     padding: .35rem;
                     outline: none;
@@ -79,6 +83,7 @@
                 }
             }
 
+            // BUTTON STYLE ONLY FOR .container-form
             & button {
                 width: max-content;
                 align-self: self-end;
@@ -131,6 +136,7 @@
                 width: 100%
             }
 
+            // STYLE CUSTOM SCROLLBAR
             &::-webkit-scrollbar {
                 width: 12px;
             }
@@ -144,7 +150,7 @@
                 background: $secondary-color;
             }
 
-
+            // STYLE CONTENT LIST PERSON
             & .content-person {
                 background-color: $background-list;
                 display: grid;

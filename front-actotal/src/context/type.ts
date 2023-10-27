@@ -1,9 +1,11 @@
 import type { Dispatch, ReactNode, SetStateAction } from "react";
 
+// interface for ContextProvider
 export interface ContextProps {
     children: ReactNode;
 }
 
+// type for Person
 export type PersonType = {
     id: number,
     name: string,
@@ -13,16 +15,19 @@ export type PersonType = {
     updatedAt: Date
 }
 
+// type for FormValues
 export type FormValuesType = {
     name: string,
     phone: string | number,
     email: string
 }
 
+// type for Errors
 export type ErrorType = {
     [key: string]: boolean
 }
 
+// type for Context Value
 export type ValueContextType = {
     formValues: FormValuesType,
     setFormValues: Dispatch<SetStateAction<FormValuesType>>,
@@ -34,4 +39,5 @@ export type ValueContextType = {
     setPage: Dispatch<SetStateAction<number>>,
     page: number,
     totalPages: number | null,
+    isLoading: boolean,
 }
