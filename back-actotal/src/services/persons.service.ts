@@ -1,6 +1,6 @@
 import { isEmail, isPhone } from "../utils/validators"
 
-export const serviceValidations = ({ email, phone }: InputDataValidation) => {
+export const serviceValidations = ({ email, phone }: any) => {
 
     if(isEmail(email) === false) {
         throw new Error("Invalid email")
